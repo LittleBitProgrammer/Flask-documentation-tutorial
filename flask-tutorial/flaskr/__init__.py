@@ -38,6 +38,13 @@ def create_app(test_config=None):
     from . import db
     db.init_app(application)
 
+    from . import auth
+    application.register_blueprint(auth.bp)
+
+    from . import blog
+    application.register_blueprint(blog.bp)
+    application.add_url_rule('/', endpoint='index')
+
     # a simple page that say hello
     @application.route('/hello')
     def hello():
